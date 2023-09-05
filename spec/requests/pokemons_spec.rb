@@ -6,7 +6,7 @@ RSpec.describe "Pokemons", type: :request do
       Pokemon.create( {
         name: 'Bulbasaur',
         specialty: 'Grass',
-        age: 5,
+        level: 5,
         image: 'https://www.serebii.net/pokemon/art/001.png',
         strong_against: 'Water',
         weak_against: 'Fire'
@@ -27,7 +27,7 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 5,
+          level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
           weak_against: 'Fire'
@@ -42,7 +42,7 @@ RSpec.describe "Pokemons", type: :request do
 
       expect(pokemon.name).to eq 'Bulbasaur'
       expect(pokemon.specialty).to eq 'Grass'
-      expect(pokemon.age).to eq 5
+      expect(pokemon.level).to eq 5
       expect(pokemon.image).to eq 'https://www.serebii.net/pokemon/art/001.png'
       expect(pokemon.strong_against).to eq 'Water'
       expect(pokemon.weak_against).to eq 'Fire'
@@ -56,7 +56,7 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 5,
+          level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
           weak_against: 'Fire'
@@ -71,7 +71,7 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 7,
+          level: 7,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
           weak_against: 'Fire'
@@ -83,7 +83,7 @@ RSpec.describe "Pokemons", type: :request do
       updated_pokemon = Pokemon.find(pokemon.id)
       expect(response).to have_http_status(200)
 
-      expect(updated_pokemon.age).to eq 7
+      expect(updated_pokemon.level).to eq 7
     end
   end
 
@@ -93,7 +93,7 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 5,
+          level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
           weak_against: 'Fire'

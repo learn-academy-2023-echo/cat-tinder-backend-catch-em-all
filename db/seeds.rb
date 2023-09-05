@@ -10,7 +10,7 @@ pokemons = [
     {
         name: 'Bulbasaur',
         specialty: 'Grass',
-        age: 5,
+        level: 5,
         image: 'https://www.serebii.net/pokemon/art/001.png',
         strong_against: 'Water',
         weak_against: 'Fire'
@@ -18,7 +18,7 @@ pokemons = [
     {
         name: 'Charmander',
         specialty: 'Fire',
-        age: 4,
+        level: 4,
         image: 'https://www.serebii.net/pokemon/art/004.png',
         strong_against: 'Grass',
         weak_against: 'Water'
@@ -26,7 +26,7 @@ pokemons = [
     {
         name: 'Squirtle',
         specialty: 'Water',
-        age: 7,
+        level: 7,
         image: 'https://www.serebii.net/pokemon/art/007.png',
         strong_against: 'Fire',
         weak_against: 'Grass'
