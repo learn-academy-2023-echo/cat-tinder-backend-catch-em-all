@@ -5,3 +5,35 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+pokemons = [
+    {
+        name: 'Bulbasaur',
+        specialty: 'Grass',
+        age: 5,
+        image: 'https://www.serebii.net/pokemon/art/001.png',
+        strong_against: 'Water',
+        weak_against: 'Fire'
+    },
+    {
+        name: 'Charmander',
+        specialty: 'Fire',
+        age: 4,
+        image: 'https://www.serebii.net/pokemon/art/004.png',
+        strong_against: 'Grass',
+        weak_against: 'Water'
+    },
+    {
+        name: 'Squirtle',
+        specialty: 'Water',
+        age: 7,
+        image: 'https://www.serebii.net/pokemon/art/007.png',
+        strong_against: 'Fire',
+        weak_against: 'Grass'
+    }
+]
+
+pokemons.each do |each_pokemon|
+    Pokemon.create each_pokemon
+    puts "creating pokemon #{each_pokemon}"
+end
