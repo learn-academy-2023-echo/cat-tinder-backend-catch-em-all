@@ -129,13 +129,3 @@ RSpec.describe Pokemon, type: :model do
     end
     
   end
-  
-  # it "should validate instance" do
-  #   pokemon = Pokemon.create
-  #   expect(pokemon.errors[:specialty]).to_not be_empty
-  #   expect(pokemon.errors[:name]).to_not be_empty
-  #   expect(pokemon.errors[:level]).to_not be_empty
-  #   expect(pokemon.errors[:image]).to_not be_empty
-  #   expect(pokemon.errors[:weak_against]).to_not be_empty
-  #   expect(pokemon.errors[:strong_against]).to_not be_empty
-  # end
