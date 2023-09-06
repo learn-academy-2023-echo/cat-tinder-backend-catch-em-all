@@ -9,7 +9,8 @@ RSpec.describe "Pokemons", type: :request do
         level: 5,
         image: 'https://www.serebii.net/pokemon/art/001.png',
         strong_against: 'Water',
-        weak_against: 'Fire'
+        weak_against: 'Fire',
+        enjoys: 'likes to spit watermelon seeds'
     })
 
     get '/pokemons' 
@@ -30,7 +31,8 @@ RSpec.describe "Pokemons", type: :request do
           level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -46,6 +48,7 @@ RSpec.describe "Pokemons", type: :request do
       expect(pokemon.image).to eq 'https://www.serebii.net/pokemon/art/001.png'
       expect(pokemon.strong_against).to eq 'Water'
       expect(pokemon.weak_against).to eq 'Fire'
+      expect(pokemon.enjoys).to eq 'likes to spit watermelon seeds'
       
     end
   end
@@ -59,7 +62,8 @@ RSpec.describe "Pokemons", type: :request do
           level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -74,7 +78,8 @@ RSpec.describe "Pokemons", type: :request do
           level: 7,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -96,7 +101,8 @@ RSpec.describe "Pokemons", type: :request do
           level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -122,7 +128,8 @@ RSpec.describe "Pokemons", type: :request do
           level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -139,7 +146,8 @@ RSpec.describe "Pokemons", type: :request do
           level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -156,7 +164,8 @@ RSpec.describe "Pokemons", type: :request do
           specialty: 'Grass',
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -173,7 +182,8 @@ RSpec.describe "Pokemons", type: :request do
           specialty: 'Grass',
           level: 5,
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -190,7 +200,8 @@ RSpec.describe "Pokemons", type: :request do
           specialty: 'Grass',
           level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -207,7 +218,8 @@ RSpec.describe "Pokemons", type: :request do
           specialty: 'Grass',
           level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
-          strong_against: 'Water'
+          strong_against: 'Water',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -215,6 +227,24 @@ RSpec.describe "Pokemons", type: :request do
       expect(response.status).to eq(422)
       pokemon = JSON.parse(response.body)
       expect(pokemon['weak_against']).to include "can't be blank"
+    end
+
+    it "doesn't create a pokemon without enjoys" do
+      pokemon_params = { 
+        pokemon: {
+          name: 'Bulbasaur',
+          specialty: 'Grass',
+          level: 5,
+          image: 'https://www.serebii.net/pokemon/art/001.png',
+          strong_against: 'Water',
+          weak_against: 'Fire'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['enjoys']).to include "can't be blank"
     end
   end
 

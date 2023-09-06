@@ -13,7 +13,8 @@ pokemons = [
         level: 5,
         image: 'https://www.serebii.net/pokemon/art/001.png',
         strong_against: 'Water',
-        weak_against: 'Fire'
+        weak_against: 'Fire',
+        enjoys: 'likes to spit watermelon seeds'
     },
     {
         name: 'Charmander',
@@ -21,7 +22,8 @@ pokemons = [
         level: 4,
         image: 'https://www.serebii.net/pokemon/art/004.png',
         strong_against: 'Grass',
-        weak_against: 'Water'
+        weak_against: 'Water',
+        enjoys: 'play with fire'
     },
     {
         name: 'Squirtle',
@@ -29,7 +31,8 @@ pokemons = [
         level: 7,
         image: 'https://www.serebii.net/pokemon/art/007.png',
         strong_against: 'Fire',
-        weak_against: 'Grass'
+        weak_against: 'Grass',
+        enjoys: 'loves to swim'
     }
 ]
 
