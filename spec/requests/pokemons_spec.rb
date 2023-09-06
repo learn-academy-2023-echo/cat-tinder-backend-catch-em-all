@@ -6,10 +6,11 @@ RSpec.describe "Pokemons", type: :request do
       Pokemon.create( {
         name: 'Bulbasaur',
         specialty: 'Grass',
-        age: 5,
+        level: 5,
         image: 'https://www.serebii.net/pokemon/art/001.png',
         strong_against: 'Water',
-        weak_against: 'Fire'
+        weak_against: 'Fire',
+        enjoys: 'likes to spit watermelon seeds'
     })
 
     get '/pokemons' 
@@ -27,10 +28,11 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 5,
+          level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -42,10 +44,11 @@ RSpec.describe "Pokemons", type: :request do
 
       expect(pokemon.name).to eq 'Bulbasaur'
       expect(pokemon.specialty).to eq 'Grass'
-      expect(pokemon.age).to eq 5
+      expect(pokemon.level).to eq 5
       expect(pokemon.image).to eq 'https://www.serebii.net/pokemon/art/001.png'
       expect(pokemon.strong_against).to eq 'Water'
       expect(pokemon.weak_against).to eq 'Fire'
+      expect(pokemon.enjoys).to eq 'likes to spit watermelon seeds'
       
     end
   end
@@ -56,10 +59,11 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 5,
+          level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -71,10 +75,11 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 7,
+          level: 7,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -83,7 +88,7 @@ RSpec.describe "Pokemons", type: :request do
       updated_pokemon = Pokemon.find(pokemon.id)
       expect(response).to have_http_status(200)
 
-      expect(updated_pokemon.age).to eq 7
+      expect(updated_pokemon.level).to eq 7
     end
   end
 
@@ -93,10 +98,11 @@ RSpec.describe "Pokemons", type: :request do
         pokemon: {
           name: 'Bulbasaur',
           specialty: 'Grass',
-          age: 5,
+          level: 5,
           image: 'https://www.serebii.net/pokemon/art/001.png',
           strong_against: 'Water',
-          weak_against: 'Fire'
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
         }
       }
 
@@ -113,4 +119,133 @@ RSpec.describe "Pokemons", type: :request do
       expect(pokemons).to be_empty
     end
   end
+
+  describe "Cannot create new pokemon without valid attributes" do
+    it "doesn't create a pokemon without a name" do
+      pokemon_params = { 
+        pokemon: {
+          specialty: 'Grass',
+          level: 5,
+          image: 'https://www.serebii.net/pokemon/art/001.png',
+          strong_against: 'Water',
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['name']).to include "can't be blank"
+    end
+
+    it "doesn't create a pokemon without a specialty" do
+      pokemon_params = { 
+        pokemon: {
+          name: 'Bulbasaur',
+          level: 5,
+          image: 'https://www.serebii.net/pokemon/art/001.png',
+          strong_against: 'Water',
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['specialty']).to include "can't be blank"
+    end
+
+    it "doesn't create a pokemon without a level" do
+      pokemon_params = { 
+        pokemon: {
+          name: 'Bulbasaur',
+          specialty: 'Grass',
+          image: 'https://www.serebii.net/pokemon/art/001.png',
+          strong_against: 'Water',
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['level']).to include "can't be blank"
+    end
+
+    it "doesn't create a pokemon without an image" do
+      pokemon_params = { 
+        pokemon: {
+          name: 'Bulbasaur',
+          specialty: 'Grass',
+          level: 5,
+          strong_against: 'Water',
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['image']).to include "can't be blank"
+    end
+
+    it "doesn't create a pokemon without a strong_against" do
+      pokemon_params = { 
+        pokemon: {
+          name: 'Bulbasaur',
+          specialty: 'Grass',
+          level: 5,
+          image: 'https://www.serebii.net/pokemon/art/001.png',
+          weak_against: 'Fire',
+          enjoys: 'likes to spit watermelon seeds'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['strong_against']).to include "can't be blank"
+    end
+
+    it "doesn't create a pokemon without a weak_against" do
+      pokemon_params = { 
+        pokemon: {
+          name: 'Bulbasaur',
+          specialty: 'Grass',
+          level: 5,
+          image: 'https://www.serebii.net/pokemon/art/001.png',
+          strong_against: 'Water',
+          enjoys: 'likes to spit watermelon seeds'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['weak_against']).to include "can't be blank"
+    end
+
+    it "doesn't create a pokemon without enjoys" do
+      pokemon_params = { 
+        pokemon: {
+          name: 'Bulbasaur',
+          specialty: 'Grass',
+          level: 5,
+          image: 'https://www.serebii.net/pokemon/art/001.png',
+          strong_against: 'Water',
+          weak_against: 'Fire'
+        }
+      }
+
+      post '/pokemons', params: pokemon_params
+      expect(response.status).to eq(422)
+      pokemon = JSON.parse(response.body)
+      expect(pokemon['enjoys']).to include "can't be blank"
+    end
+  end
+
 end
